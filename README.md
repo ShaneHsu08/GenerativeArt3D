@@ -1,50 +1,53 @@
-# 生成艺术与裸眼3D (Generative Art & Glasses-Free 3D)
+# Generative Art & Glasses-Free 3D
 
-## 背景
+[中文版](README_zh.md) | [日文版](README_ja.md)
 
-本项目旨在融合两种迷人的视觉艺术形式：**代码生成艺术** 与 **裸眼3D效果**，创造出一种沉浸式的交互体验。
+## UI Preview
 
-### 公式起源：Dwitter 与代码艺术
+![UI Screenshot](screenshot/UI_en.png)
 
-项目中使用的核心数学公式，其风格和灵感主要起源于一个名为 **Dwitter.net** 的创意编码社区。Dwitter 是一个专门分享极短 JavaScript 代码（最初限制在140个字符内）生成视觉艺术的平台。这种极限挑战催生了一种独特的“代码高尔夫”文化，艺术家们通过精妙的数学和编程技巧，在极小的空间内创造出惊人复杂的动态视觉效果。
+## Background
 
-Twitter 用户 **[@yuruyurao](https://twitter.com/yuruyurau)** 是这个领域的杰出创作者之一。他创作并分享了大量此类精美的生成艺术公式，本项目中的大部分代码变体都来源于他的无私分享和启发。
+This project merges two fascinating forms of visual art: **Generative Art** and **Glasses-Free 3D Effects**, creating an immersive and interactive experience.
 
-### 裸眼3D原理：“色彩立体效应”
+### Formula Origins: Dwitter and Code Art
 
-本项目的“裸眼3D”功能并非真正的三维渲染，而是巧妙地利用了一种名为 **“色彩立体效应”（Chromostereopsis）** 的视觉现象。其原理如下：
+The core mathematical formulas are inspired by **Dwitter.net**, a creative coding community where artists share visuals generated from extremely short JavaScript code (often under 140 characters). This constraint fosters a "code-golfing" culture, where artists use clever math and programming to create stunningly complex visuals from a tiny footprint.
 
-人眼的晶状体在折射不同波长的光线时，会产生微小的色差。波长较长的光（如红色）会聚焦在视网膜的稍后方，而波长较短的光（如蓝色）则聚焦在稍前方。大脑在处理这些信号时，会“误认为”红色物体离我们更近，而蓝色物体更远。
+Many of the code variations in this project are adapted from or inspired by the work of Twitter user **[@ア](https://twitter.com/yuruyurau)**, a prominent creator in this space.
 
-当我们将鲜艳的红色粒子放置在深蓝色的背景上时，这种效应尤为明显，从而产生自然的景深感，仿佛图像具有了三维结构。
+### Glasses-Free 3D: The "Chromostereopsis" Effect
 
+The "glasses-free 3D" in this project isn't true 3D rendering but a clever use of a visual phenomenon called **Chromostereopsis**. Here's how it works:
 
-### 戴上近视眼镜感觉更明显
+The human eye's lens refracts different wavelengths of light at slightly different angles. Longer wavelengths (like red) focus slightly behind the retina, while shorter wavelengths (like blue) focus slightly in front. When processing these signals, the brain perceives red objects as closer and blue objects as farther away.
 
-近视眼镜是凹透镜，它本身也会产生色差。
-当你戴上眼镜看手机时，光线需要先穿过眼镜的镜片，再穿过你眼睛的晶状体。这两个透镜的色差效应会叠加和放大。
-这种放大作用使得红光和蓝光的焦点分离得更“远”，大脑接收到的“远近”信号就更强烈，因此你会感觉立体感“爆棚”。不同的眼镜材质和度数，放大的效果也会有所不同。
+This effect is especially pronounced when vibrant red particles are placed on a deep blue background, creating a natural sense of depth that makes the image appear three-dimensional.
 
-### 本项目的创新结合
+### An Enhanced Effect with Myopia (Nearsightedness)
 
-本项目的核心贡献在于 **系统性地整理了这些精妙的2D生成艺术公式，并首次将它们与“色彩立体效应”相结合**。通过提供可定制的粒子和背景颜色选项，用户可以主动触发并控制这种裸眼3D效果的强度，将原本平面的数学艺术转化为具有立体感的动态画作，从而提供了一种全新的互动和欣赏方式。
+This 3D effect can be even more pronounced for individuals with myopia (nearsightedness) when they are wearing their prescription glasses. Concave lenses, used to correct myopia, also produce chromatic aberration. When light passes through both the glasses and the eye's natural lens, the chromatic aberration from both sources combines, amplifying the separation between red and blue focal points. This sends a stronger "depth" signal to the brain, making the 3D effect "pop." The intensity of this enhancement can vary depending on the glasses' material and prescription strength.
 
-## 功能特性
+### Project's Contribution
 
-### 🎨 多样化的艺术效果
-- **40种不同的代码变体**：每个变体都基于不同的数学公式，产生独特的视觉效果
-- **实时动画**：基于时间变量的动态效果，呈现流畅的粒子运动
-- **数学驱动**：使用三角函数、指数函数等数学函数生成艺术图案
+This project's main contribution is the **systematic organization of these sophisticated generative art formulas, combined with the Chromostereopsis effect**. By allowing users to customize particle and background colors, it provides a tool to trigger and control this glasses-free 3D phenomenon. The result transforms flat mathematical art into a dynamic, three-dimensional visual experience.
 
-### 🎛️ 可定制的视觉参数
-- **粒子颜色**：4种预设颜色（红色、橙色、黄色、纯红色）
-- **背景颜色**：4种背景选择（蓝色、青色、紫色、黑色）
-- **粒子大小**：可调节范围 0.5-3.0
-- **画布尺寸**：可调节基础尺寸 120-250 * (3 : 4), 即画布尺寸 360x480 - 750x1000
+## Features
 
-### 🌐 多语言支持
-支持7种语言界面：
-- 中文 (简体)
+### 🎨 Diverse Artistic Effects
+- **40 Different Code Variations**: Each based on a unique mathematical formula for distinct visuals.
+- **Real-time Animation**: Dynamic effects driven by a time variable for fluid particle motion.
+- **Math-Driven**: Art generated using trigonometric functions, exponential functions, and more.
+
+### 🎛️ Customizable Visual Parameters
+- **Particle Color**: Choose from 4 presets (Red, Orange, Yellow, Pure Red).
+- **Background Color**: Choose from 4 presets (Blue, Cyan, Purple, Black).
+- **Particle Size**: Adjust particle size from 0.5 to 3.0.
+- **Canvas Size**: Adjust a base multiplier from 120 to 250. The canvas maintains a 3:4 aspect ratio, resulting in final dimensions ranging from 360x480 to 750x1000 pixels.
+
+### 🌐 Multi-Language Support
+Supports 7 interface languages:
+- 中文 (Simplified Chinese)
 - English
 - 日本語
 - 한국어
@@ -52,128 +55,134 @@ Twitter 用户 **[@yuruyurao](https://twitter.com/yuruyurau)** 是这个领域�
 - Français
 - العربية
 
-### 📱 响应式设计
-- 适配不同屏幕尺寸
-- 移动端友好的操作界面
-- 现代化的暗色主题设计
+### 📱 Responsive Design
+- Adapts to different screen sizes.
+- Mobile-friendly user interface.
+- Modern dark theme design.
 
-## 技术栈
+### 📸 Image Saving
+- **One-Click Save**: Save the current artwork with a single click on the camera icon.
+- **Smart Naming**: Automatically generates filenames with the code version and timestamp.
+- **High-Quality PNG**: Saves in lossless PNG format for clear images.
+- **Consistent Sizing**: The saved image dimensions match the displayed canvas size.
 
-- **HTML5 Canvas**：用于图形渲染
-- **p5.js**：JavaScript创意编程库
-- **CSS3**：现代化的样式设计
-- **JavaScript ES6+**：核心逻辑实现
-- **为便于部署采用单文件结构
+## Tech Stack
 
-## 项目结构
+- **HTML5 Canvas**: For graphics rendering.
+- **p5.js**: A JavaScript library for creative coding.
+- **CSS3**: For modern styling.
+- **JavaScript ES6+**: For core logic.
+- **Single-file structure for easy deployment.**
+
+## Project Structure
 
 ```
 GenerativeArt3D/
-├── genart3d.html           # 主要HTML文件
-└── README.md              # 项目说明文档
+├── genart3d.html           # Main HTML file
+└── README.md              # Project documentation
 ```
 
-## 快速开始
+## Quick Start
 
-### 部署方式
+### Deployment
 
-#### 1. 本地部署
+#### 1. Local Deployment
 ```bash
-# 克隆项目
+# Clone the project
 git clone <repository-url>
 cd GenerativeArt3D
 
-# 直接在浏览器中打开HTML文件
+# Open the HTML file directly in your browser
 open genart3d.html
 ```
 
-#### 2. Web服务器部署
+#### 2. Web Server Deployment
 ```bash
-# 使用Python启动简单HTTP服务器
+# Start a simple HTTP server with Python
 python -m http.server 8000
 
-# 或使用Node.js的http-server
+# Or use Node.js http-server
 npx http-server
 
-# 然后在浏览器访问 http://localhost:8000
+# Then visit http://localhost:8000 in your browser
 ```
 
-#### 3. GitHub Pages部署
-1. 将项目上传到GitHub仓库
-2. 在仓库设置中启用GitHub Pages
-3. 选择主分支作为源
-4. 访问 `https://ShaneHsu08.github.io/GenerativeArt3D/genart3d.html`
+#### 3. GitHub Pages Deployment
+1. Upload the project to a GitHub repository.
+2. In repository settings, enable GitHub Pages.
+3. Select the `main` branch as the source.
+4. Visit `https://YourUsername.github.io/YourRepo/genart3d.html`.
 
-#### 4. Netlify部署
-1. 将项目文件夹拖拽到Netlify部署页面
-2. 或连接GitHub仓库进行自动部署
-3. 获得自动生成的访问链接
+#### 4. Netlify Deployment
+1. Drag and drop the project folder onto the Netlify deploy page.
+2. Or connect your GitHub repository for automatic deployment.
+3. Get your automatically generated URL.
 
-## 使用说明
+## Usage
 
-### 基本操作
-1. **选择艺术效果**：从下拉菜单选择不同的代码变体
-2. **调整颜色**：点击色彩选择器改变粒子和背景颜色
-3. **调节大小**：使用+/-按钮调整粒子大小和画布尺寸
-4. **切换语言**：从语言下拉菜单选择界面语言
+1. **Select Art Effect**: Choose a code variation from the dropdown menu.
+2. **Adjust Colors**: Change particle and background colors.
+3. **Adjust Sizes**: Use the +/- buttons to change particle and canvas sizes.
+4. **Switch Language**: Select your preferred language.
+5. **Save Image**: Click the camera icon to save the artwork as a high-quality PNG file. The filename is automatically generated (e.g., `generative-art-5-1672531200.png`).
 
-### 参数说明
-- **代码选择**：40种不同的数学算法，每种产生独特效果
-- **粒子颜色**：影响移动点的颜色
-- **背景颜色**：设置画布背景色彩
-- **粒子大小**：控制点的绘制粗细
-- **画布大小**：调整整个画布的尺寸
+### Parameter Guide
+- **Code Selection**: Choose from 40 different mathematical algorithms, each creating a unique visual.
+- **Particle Color**: Sets the color of the moving points. To best experience the 3D effect, use a Red/Orange particle on a Blue/Black background.
+- **Background Color**: Sets the canvas background color.
+- **Particle Size**: Controls the diameter of the drawn points.
+- **Canvas Size**: Adjusts the canvas dimensions.
+- **Save Image**: Captures the current canvas content.
 
-## 数学原理
+## How It Works: The Math
 
-项目中的艺术效果基于复杂的数学公式，主要包括：
+The visuals are generated by mathematical formulas that calculate the position of each particle for every frame. These formulas often include:
 
-- **三角函数**：`sin()`, `cos()`, `tan()` 用于创建周期性运动
-- **距离计算**：`mag()` 函数计算向量长度
-- **时间变量**：`t` 变量驱动动画效果
-- **坐标变换**：复杂的坐标映射和旋转
+- **Trigonometric Functions**: `sin()`, `cos()`, and `tan()` for periodic motion.
+- **Vector Operations**: The `mag()` function (magnitude) to calculate distances.
+- **A Time Variable (`t`)**: Used to evolve the animation over time.
+- **Coordinate Transformations**: Complex mapping and rotations to create intricate patterns.
 
-**重要提示**：当前项目实现主要针对基于 `point()` 函数进行逐点绘制的公式，也就是通常所说的“粒子系统”效果。对于使用线条 (`line()`) 或形状 (`rect()`, `ellipse()`) 等其他 p5.js 绘图函数的公式，可能无法直接适用或需要进行相应的代码改造。
+**Important Note for Developers**: This project is optimized for formulas that render visuals point-by-point using the `point()` function (i.e., particle systems). Formulas that rely on other p5.js drawing functions like `line()`, `rect()`, or `ellipse()` may require code modifications to work correctly.
 
-示例公式：
+Example Formula:
 ```javascript
 a=(x,y,d=mag(k=(4+sin(y*2-t)*3)*cos(x/29),e=y/8-13))=>
   point((q=3*sin(k*2)+.3/k+sin(y/25)*k*(9+4*sin(e*9-d*3+t*2)))+
         30*cos(c=d-t)+200,q*sin(c)+d*39-220)
 ```
 
-## 浏览器兼容性
+## Browser Compatibility
 
 - Chrome 60+
 - Firefox 55+
 - Safari 12+
 - Edge 79+
 
-## 贡献指南
+## Contribution Guide
 
-欢迎贡献新的艺术效果或改进现有功能！
+Contributions of new artistic effects or improvements are welcome!
 
-1. Fork 项目
-2. 创建功能分支：`git checkout -b feature/new-effect`
-3. 提交更改：`git commit -am 'Add new artistic effect'`
-4. 推送分支：`git push origin feature/new-effect`
-5. 创建Pull Request
+1. Fork the project.
+2. Create a feature branch: `git checkout -b feature/new-effect`
+3. Commit your changes: `git commit -am 'Add new artistic effect'`
+4. Push to the branch: `git push origin feature/new-effect`
+5. Create a Pull Request.
 
-## 致谢
+## Acknowledgements
 
-- 艺术算法来源：[@yuruyurao](https://twitter.com/yuruyurau) , [Dwitter](https://dwitter.net)
-- p5.js创意编程库：[p5js.org](https://p5js.org/)
-- 数学之美的灵感来源于自然界的几何图案
+- Art Algorithm Sources: [@ア](https://twitter.com/yuruyurau), [Dwitter](https://dwitter.net)
+- Creative Coding Library: [p5js.org](https://p5js.org/)
+- Inspiration for mathematical beauty from geometric patterns in nature.
 
-## 许可证
+## License
 
 MIT License
 
-## 联系方式
+## Contact
 
-如有问题、建议或者提交新的公式，请创建GitHub Issue
-
+For questions, suggestions, or new formula submissions, please create a GitHub Issue.
 
 ---
 
-*让数学与艺术在代码中完美融合* ✨ 
+*Where math and art merge in code* ✨ 

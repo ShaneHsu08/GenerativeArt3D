@@ -105,10 +105,10 @@
             padding: 16px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 16px;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             align-items: start;
         }
 
@@ -269,6 +269,39 @@
             text-align: center;
         }
 
+        /* ===== CAMERA BUTTON ===== */
+        .camera-button {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            min-height: 32px;
+            color: #1d1d1f;
+        }
+
+        .camera-button:hover {
+            background: rgba(0, 0, 0, 0.08);
+            border-color: rgba(0, 0, 0, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .camera-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .camera-button svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
         /* ===== CANVAS CONTAINER ===== */
         .canvas-container {
             border-radius: 20px;
@@ -396,7 +429,7 @@
             }
 
             .control-panel {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
                 gap: 12px;
                 padding: 12px;
             }
@@ -450,7 +483,8 @@
 
         /* Focus styles for keyboard navigation */
         .size-button:focus,
-        .color-option:focus {
+        .color-option:focus,
+        .camera-button:focus {
             outline: 2px solid #007aff;
             outline-offset: 2px;
         }
@@ -498,6 +532,17 @@
             .size-display {
                 background: rgba(255, 255, 255, 0.1);
                 color: #f2f2f7;
+            }
+
+            .camera-button {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.2);
+                color: #f2f2f7;
+            }
+
+            .camera-button:hover {
+                background: rgba(255, 255, 255, 0.15);
+                border-color: rgba(255, 255, 255, 0.3);
             }
         }
     </style>
@@ -561,13 +606,22 @@
                  </div>
              </div>
 
-            <div class="control-group">
-                <label class="control-label" for="code-selector" id="code-label">Code Selection</label>
-                <select class="select-control" id="code-selector" aria-describedby="code-help">
-                    <!-- Options populated by JavaScript -->
-                </select>
-            </div>
-        </div>
+                         <div class="control-group">
+                 <label class="control-label" for="code-selector" id="code-label">Code Selection</label>
+                 <select class="select-control" id="code-selector" aria-describedby="code-help">
+                     <!-- Options populated by JavaScript -->
+                 </select>
+             </div>
+
+             <div class="control-group">
+                 <label class="control-label" id="save-label">Save Image</label>
+                 <button class="camera-button" id="save-button" aria-label="Save current canvas as PNG image">
+                     <svg viewBox="0 0 24 24">
+                         <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                     </svg>
+                 </button>
+             </div>
+         </div>
         
         <!-- Canvas Container -->
         <div class="canvas-container" id="canvas-container" role="img" aria-label="Generative art visualization"></div>
@@ -670,6 +724,7 @@
                 langLabel: '语言',
                 sizeLabel: '粒子大小',
                 canvasLabel: '画布大小',
+                saveLabel: '保存图像',
                 bgText2: '数学算法驱动',
                 bgText3: '数学之美 · 代码艺术',
                 footerCredits: '特别感谢',
@@ -684,6 +739,7 @@
                 langLabel: 'Language',
                 sizeLabel: 'Particle Size',
                 canvasLabel: 'Canvas Size',
+                saveLabel: 'Save Image',
                 bgText2: 'Driven by Mathematical Algorithms',
                 bgText3: 'Beauty of Math · Code Art',
                 footerCredits: 'Special Thanks',
@@ -698,6 +754,7 @@
                 langLabel: '言語',
                 sizeLabel: 'パーティクルサイズ',
                 canvasLabel: 'キャンバスサイズ',
+                saveLabel: '画像保存',
                 bgText2: '数学アルゴリズム駆動',
                 bgText3: '数学の美・コードアート',
                 footerCredits: '特別感謝',
@@ -712,6 +769,7 @@
                 langLabel: '언어',
                 sizeLabel: '입자 크기',
                 canvasLabel: '캔버스 크기',
+                saveLabel: '이미지 저장',
                 bgText2: '수학적 알고리즘 기반',
                 bgText3: '수학의 아름다움 · 코드 예술',
                 footerCredits: '특별 감사',
@@ -726,6 +784,7 @@
                 langLabel: 'Sprache',
                 sizeLabel: 'Teilchengröße',
                 canvasLabel: 'Bildschirmgröße',
+                saveLabel: 'Bild Speichern',
                 bgText2: 'Durch mathematische Algorithmen angetrieben',
                 bgText3: 'Schönheit der Mathematik · Codekunst',
                 footerCredits: 'Besondere Dank',
@@ -740,6 +799,7 @@
                 langLabel: 'Langue',
                 sizeLabel: 'Taille des Particules',
                 canvasLabel: 'Taille de l\'Écran',
+                saveLabel: 'Enregistrer',
                 bgText2: 'Propulsé par des Algorithmes Mathématiques',
                 bgText3: 'Beauté des Mathématiques · Art de Code',
                 footerCredits: 'Remerciements Spéciaux',
@@ -754,6 +814,7 @@
                 langLabel: 'اللغة',
                 sizeLabel: 'حجم الجسيمات',
                 canvasLabel: 'حجم الشاشة',
+                saveLabel: 'حفظ الصورة',
                 bgText2: 'منطوق بأساليب رياضية',
                 bgText3: 'جمال الرياضيات · الفن البرمجي',
                 footerCredits: 'شكر خاص',
@@ -870,6 +931,7 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/90,
         const initCanvas = () => {
             const { width, height } = Utils.getCanvasSize();
             createCanvas(width, height).parent('canvas-container');
+            pixelDensity(1); // Ensure 1:1 pixel ratio for consistent file sizes
         };
 
         const drawBackgroundText = () => {
@@ -938,7 +1000,8 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/90,
                     'particle-label': lang.particleLabel,
                     'bg-label': lang.bgLabel,
                     'size-label': lang.sizeLabel,
-                    'canvas-label': lang.canvasLabel
+                    'canvas-label': lang.canvasLabel,
+                    'save-label': lang.saveLabel
                 };
                 
                 Object.entries(elements).forEach(([id, text]) => {
@@ -1073,6 +1136,13 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/90,
                 // Canvas size controls
                 document.getElementById('canvas-decrease').addEventListener('click', () => UI.updateCanvasSize(-10));
                 document.getElementById('canvas-increase').addEventListener('click', () => UI.updateCanvasSize(10));
+                
+                // Save button
+                document.getElementById('save-button').addEventListener('click', () => {
+                    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').replace('T', '_').substring(0, 19);
+                    const filename = `generative-art-${CONFIG.currentCode}-${timestamp}.png`;
+                    save(filename);
+                });
             },
 
             setupSelectors() {
@@ -1099,6 +1169,7 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/90,
             // Initialize canvas
             const { width, height } = Utils.getCanvasSize();
             createCanvas(width, height).parent('canvas-container');
+            pixelDensity(1); // Ensure 1:1 pixel ratio for consistent file sizes
             
             // Update canvas size display
             document.getElementById('canvas-display').textContent = `${width}x${height}`;
