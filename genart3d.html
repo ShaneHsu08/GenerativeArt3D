@@ -9,157 +9,249 @@
         /* ===== GLOBAL STYLES ===== */
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #1d1d1f;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 0;
-            padding: 20px;
             min-height: 100vh;
-            text-align: center;
+            line-height: 1.6;
         }
 
-        h1 {
-            color: #ffffff;
-            font-weight: 300;
-            margin-bottom: 10px;
-            font-size: 2rem;
+        /* ===== HEADER STYLES ===== */
+        .header {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 20px;
         }
 
-        /* ===== MENU BAR STYLES ===== */
-        .menu-bar {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin: 20px 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: center;
-            justify-content: center;
-            min-width: 300px;
+        .header-content {
             max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
         }
 
-        .menu-item {
+        .header-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .language-selector {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #1d1d1f;
+            outline: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 10px center;
+            background-repeat: no-repeat;
+            background-size: 14px;
+            padding-right: 32px;
+        }
+
+        .language-selector:hover {
+            background: rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .language-selector:focus {
+            border-color: #007aff;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 32px;
         }
 
-        .menu-label {
+        /* ===== CONTROL PANEL ===== */
+        .control-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            width: 100%;
+            max-width: 900px;
+            align-items: start;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 60px;
+        }
+
+        .control-label {
             font-size: 12px;
-            color: #b3d9ff;
-            font-weight: 500;
-            white-space: nowrap;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 2px;
+            text-align: center;
+            width: 100%;
         }
 
         /* ===== FORM CONTROLS ===== */
-        select {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 6px;
+        .select-control {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             padding: 8px 12px;
-            color: #ffffff;
-            font-size: 14px;
+            font-size: 13px;
+            color: #1d1d1f;
             outline: none;
             transition: all 0.3s ease;
-            min-width: 100px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 10px center;
+            background-repeat: no-repeat;
+            background-size: 14px;
+            padding-right: 32px;
+            cursor: pointer;
+            min-height: 40px;
+            box-sizing: border-box;
         }
 
-        select:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
+        .select-control:hover {
+            background: rgba(0, 0, 0, 0.08);
+            border-color: rgba(0, 0, 0, 0.2);
         }
 
-        select:focus {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: #4dabf7;
-            box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.3);
+        .select-control:focus {
+            border-color: #007aff;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
         }
 
         /* ===== COLOR SELECTORS ===== */
         .color-selector {
             display: flex;
             gap: 8px;
-            padding: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 6px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             transition: all 0.3s ease;
-        }
-
-        .color-selector:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
+            min-height: 32px;
+            align-items: center;
+            justify-content: center;
         }
 
         .color-option {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .color-option:hover {
-            transform: scale(1.2);
-            border-color: #ffffff;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .color-option.active {
-            border-color: #4dabf7;
-            box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.5);
+            border-color: #007aff;
+            box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+        }
+
+        .color-option.active::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         /* Particle Colors */
-        .particle-red { background-color: #ff4757; }
-        .particle-orange { background-color: #ff7f50; }
-        .particle-yellow { background-color: #ffd700; }
-        .particle-pure-red { background-color: #ff0000; }
+        .particle-red { background: linear-gradient(135deg, #ff6b6b, #ee5a52); }
+        .particle-orange { background: linear-gradient(135deg, #ffa726, #ff9800); }
+        .particle-yellow { background: linear-gradient(135deg, #ffeb3b, #ffc107); }
+        .particle-pure-red { background: linear-gradient(135deg, #f44336, #d32f2f); }
 
         /* Background Colors */
-        .bg-blue { background-color: #2040f1; }
-        .bg-cyan { background-color: #00b894; }
-        .bg-purple { background-color: #6c5ce7; }
-        .bg-black { background-color: #000000; }
+        .bg-blue { background: linear-gradient(135deg, #2196f3, #1976d2); }
+        .bg-cyan { background: linear-gradient(135deg, #00bcd4, #0097a7); }
+        .bg-purple { background: linear-gradient(135deg, #9c27b0, #7b1fa2); }
+        .bg-black { background: linear-gradient(135deg, #424242, #212121); }
 
         /* ===== SIZE CONTROLS ===== */
         .size-controls {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            padding: 3px 5px;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            min-height: 30px;
         }
 
         .size-button {
-            width: 28px;
-            height: 28px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.08);
+            border: none;
+            color: #1d1d1f;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             transition: all 0.3s ease;
             user-select: none;
         }
 
         .size-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: scale(1.1);
+            background: rgba(0, 0, 0, 0.12);
+            transform: scale(1.05);
         }
 
         .size-button:active {
@@ -167,92 +259,184 @@
         }
 
         .size-display {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-            padding: 4px 8px;
-            font-size: 12px;
-            color: #ffffff;
-            min-width: 20px;
+            background: rgba(0, 0, 0, 0.08);
+            border-radius: 6px;
+            padding: 6px 8px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #1d1d1f;
+            min-width: 50px;
             text-align: center;
-            font-weight: 500;
         }
 
         /* ===== CANVAS CONTAINER ===== */
-        #canvas-container {
-            margin-top: 20px;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+        .canvas-container {
+            border-radius: 20px;
             overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
             background: #000;
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         /* ===== FORMULA DISPLAY ===== */
-        #formula-display {
-            background-color: #2a2a2a;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-family: "Courier New", monospace;
-            font-size: 0.7em;
-            display: block;
+        .formula-display {
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 12px;
+            color: #e0e0e0;
             white-space: pre-wrap;
-            text-align: center;
-            margin: 20px 0;
-            max-width: 90vw;
+            text-align: left;
+            max-width: 100%;
             overflow-x: auto;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.4;
+        }
+
+        /* ===== FOOTER STYLES ===== */
+        .footer {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 32px 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #007aff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-link:hover {
+            background: rgba(0, 122, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .footer-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
+            margin: 16px 0;
+        }
+
+        .footer-copyright {
+            color: #86868b;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .footer-credits {
+            color: #86868b;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .footer-credits a {
+            color: #007aff;
+            text-decoration: none;
+        }
+
+        .footer-credits a:hover {
+            text-decoration: underline;
         }
 
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
+            .header-content {
+                padding: 12px 0;
             }
 
-            h1 {
-                font-size: 1.5rem;
+            .header-title {
+                font-size: 24px;
             }
 
-            .menu-bar {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px;
+            .language-selector {
+                padding: 5px 10px;
+                font-size: 12px;
+                padding-right: 28px;
             }
 
-            .menu-item {
-                width: 100%;
-                max-width: 250px;
+            .main-content {
+                padding: 20px 16px;
+                gap: 20px;
             }
 
-            select, .color-selector {
-                width: 100%;
+            .control-panel {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 12px;
+                padding: 12px;
             }
 
-            .size-controls {
-                justify-content: center;
-            }
-
-            #formula-display {
-                font-size: 0.6em;
-                padding: 8px 10px;
+            .footer-links {
+                gap: 16px;
             }
         }
 
         @media (max-width: 480px) {
-            .menu-bar {
-                gap: 10px;
-                padding: 10px;
+            .header-content {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .header-title {
+                font-size: 20px;
+            }
+
+            .control-panel {
+                grid-template-columns: 1fr;
+                padding: 12px;
+                gap: 12px;
             }
 
             .size-button {
-                width: 24px;
-                height: 24px;
-                font-size: 14px;
+                width: 20px;
+                height: 20px;
+                font-size: 12px;
             }
 
             .color-option {
-                width: 10px;
-                height: 10px;
+                width: 20px;
+                height: 20px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 12px;
             }
         }
 
@@ -267,113 +451,63 @@
         /* Focus styles for keyboard navigation */
         .size-button:focus,
         .color-option:focus {
-            outline: 2px solid #4dabf7;
+            outline: 2px solid #007aff;
             outline-offset: 2px;
         }
 
-        /* ===== FOOTER STYLES ===== */
-        .footer {
-            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            margin-top: 40px;
-            text-align: center;
-            border-radius: 12px 12px 0 0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .footer-link {
-            color: #4dabf7;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            padding: 5px 10px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .footer-link:hover {
-            color: #ffffff;
-            background: rgba(77, 171, 247, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .footer-link svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        .footer-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-            margin: 10px 0;
-        }
-
-        .footer-copyright {
-            color: #a0a0a0;
-            font-size: 12px;
-            line-height: 1.5;
-        }
-
-        .footer-credits {
-            color: #b0b0b0;
-            font-size: 13px;
-            margin-top: 5px;
-        }
-
-        .footer-credits a {
-            color: #4dabf7;
-            text-decoration: none;
-        }
-
-        .footer-credits a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .footer-links {
-                gap: 20px;
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 100%);
+                color: #f2f2f7;
             }
-            
-            .footer-link {
-                font-size: 13px;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .footer-links {
-                flex-direction: column;
-                gap: 15px;
+            .header,
+            .control-panel,
+            .footer {
+                background: rgba(28, 28, 30, 0.9);
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+
+            .header-title {
+                color: #f2f2f7;
+            }
+
+            .control-label {
+                color: #f2f2f7;
+            }
+
+            .select-control,
+            .language-selector {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.2);
+                color: #f2f2f7;
+            }
+
+            .color-selector,
+            .size-controls {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .size-button {
+                background: rgba(255, 255, 255, 0.1);
+                color: #f2f2f7;
+            }
+
+            .size-display {
+                background: rgba(255, 255, 255, 0.1);
+                color: #f2f2f7;
             }
         }
     </style>
 </head>
 <body>
-    <h1 id="main-title">Generative Art & Glasses-Free 3D</h1>
-    
-    <!-- Control Panel -->
-    <div class="menu-bar" role="toolbar" aria-label="Art Generation Controls">
-        <div class="menu-item">
-            <label class="menu-label" for="language-selector" id="lang-label">Language</label>
-            <select id="language-selector">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title" id="main-title">Generative Art & Glasses-Free 3D</h1>
+            <select class="language-selector" id="language-selector">
                 <option value="zh">中文</option>
                 <option value="en">English</option>
                 <option value="ja">日本語</option>
@@ -383,58 +517,64 @@
                 <option value="ar">العربية</option>
             </select>
         </div>
+    </header>
 
-        <div class="menu-item">
-            <label class="menu-label" id="particle-label">Particle Color</label>
-            <div class="color-selector" role="radiogroup" aria-labelledby="particle-label" id="particle-colors">
-                <div class="color-option particle-red active" data-color="red" role="radio" aria-checked="true" aria-label="Red" tabindex="0"></div>
-                <div class="color-option particle-orange" data-color="orange" role="radio" aria-checked="false" aria-label="Orange" tabindex="-1"></div>
-                <div class="color-option particle-yellow" data-color="yellow" role="radio" aria-checked="false" aria-label="Yellow" tabindex="-1"></div>
-                <div class="color-option particle-pure-red" data-color="pure-red" role="radio" aria-checked="false" aria-label="Pure Red" tabindex="-1"></div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Control Panel -->
+        <div class="control-panel" role="toolbar" aria-label="Art Generation Controls">
+            <div class="control-group">
+                <label class="control-label" id="particle-label">Particle Color</label>
+                <div class="color-selector" role="radiogroup" aria-labelledby="particle-label" id="particle-colors">
+                    <div class="color-option particle-red active" data-color="red" role="radio" aria-checked="true" aria-label="Red" tabindex="0"></div>
+                    <div class="color-option particle-orange" data-color="orange" role="radio" aria-checked="false" aria-label="Orange" tabindex="-1"></div>
+                    <div class="color-option particle-yellow" data-color="yellow" role="radio" aria-checked="false" aria-label="Yellow" tabindex="-1"></div>
+                    <div class="color-option particle-pure-red" data-color="pure-red" role="radio" aria-checked="false" aria-label="Pure Red" tabindex="-1"></div>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label" id="bg-label">Background Color</label>
+                <div class="color-selector" role="radiogroup" aria-labelledby="bg-label" id="background-colors">
+                    <div class="color-option bg-blue active" data-color="blue" role="radio" aria-checked="true" aria-label="Blue" tabindex="0"></div>
+                    <div class="color-option bg-cyan" data-color="cyan" role="radio" aria-checked="false" aria-label="Cyan" tabindex="-1"></div>
+                    <div class="color-option bg-purple" data-color="purple" role="radio" aria-checked="false" aria-label="Purple" tabindex="-1"></div>
+                    <div class="color-option bg-black" data-color="black" role="radio" aria-checked="false" aria-label="Black" tabindex="-1"></div>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label" id="size-label">Particle Size</label>
+                <div class="size-controls" role="group" aria-labelledby="size-label">
+                    <button class="size-button" id="size-decrease" aria-label="Decrease particle size">−</button>
+                    <div class="size-display" id="size-display" aria-live="polite">1.6</div>
+                    <button class="size-button" id="size-increase" aria-label="Increase particle size">+</button>
+                </div>
+            </div>
+
+                         <div class="control-group">
+                 <label class="control-label" id="canvas-label">Canvas Size</label>
+                 <div class="size-controls" role="group" aria-labelledby="canvas-label">
+                     <button class="size-button" id="canvas-decrease" aria-label="Decrease canvas size">−</button>
+                     <div class="size-display" id="canvas-display" aria-live="polite">420x560</div>
+                     <button class="size-button" id="canvas-increase" aria-label="Increase canvas size">+</button>
+                 </div>
+             </div>
+
+            <div class="control-group">
+                <label class="control-label" for="code-selector" id="code-label">Code Selection</label>
+                <select class="select-control" id="code-selector" aria-describedby="code-help">
+                    <!-- Options populated by JavaScript -->
+                </select>
             </div>
         </div>
         
-        <div class="menu-item">
-            <label class="menu-label" id="bg-label">Background Color</label>
-            <div class="color-selector" role="radiogroup" aria-labelledby="bg-label" id="background-colors">
-                <div class="color-option bg-blue active" data-color="blue" role="radio" aria-checked="true" aria-label="Blue" tabindex="0"></div>
-                <div class="color-option bg-cyan" data-color="cyan" role="radio" aria-checked="false" aria-label="Cyan" tabindex="-1"></div>
-                <div class="color-option bg-purple" data-color="purple" role="radio" aria-checked="false" aria-label="Purple" tabindex="-1"></div>
-                <div class="color-option bg-black" data-color="black" role="radio" aria-checked="false" aria-label="Black" tabindex="-1"></div>
-            </div>
-        </div>
+        <!-- Canvas Container -->
+        <div class="canvas-container" id="canvas-container" role="img" aria-label="Generative art visualization"></div>
         
-        <div class="menu-item">
-            <label class="menu-label" id="size-label">Particle Size</label>
-            <div class="size-controls" role="group" aria-labelledby="size-label">
-                <button class="size-button" id="size-decrease" aria-label="Decrease particle size">−</button>
-                <div class="size-display" id="size-display" aria-live="polite">1.6</div>
-                <button class="size-button" id="size-increase" aria-label="Increase particle size">+</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <label class="menu-label" id="canvas-label">Canvas Size</label>
-            <div class="size-controls" role="group" aria-labelledby="canvas-label">
-                <button class="size-button" id="canvas-decrease" aria-label="Decrease canvas size">−</button>
-                <div class="size-display" id="canvas-display" aria-live="polite">140</div>
-                <button class="size-button" id="canvas-increase" aria-label="Increase canvas size">+</button>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <label class="menu-label" for="code-selector" id="code-label">Code Selection</label>
-            <select id="code-selector" aria-describedby="code-help">
-                <!-- Options populated by JavaScript -->
-            </select>
-        </div>
-    </div>
-    
-    <!-- Canvas Container -->
-    <div id="canvas-container" role="img" aria-label="Generative art visualization"></div>
-    
-    <!-- Formula Display -->
-    <code id="formula-display" role="region" aria-label="Current mathematical formula"></code>
+        <!-- Formula Display -->
+        <code class="formula-display" id="formula-display" role="region" aria-label="Current mathematical formula"></code>
+    </main>
     
     <!-- Footer -->
     <footer class="footer">
@@ -797,7 +937,6 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/90,
                     'code-label': lang.codeLabel,
                     'particle-label': lang.particleLabel,
                     'bg-label': lang.bgLabel,
-                    'lang-label': lang.langLabel,
                     'size-label': lang.sizeLabel,
                     'canvas-label': lang.canvasLabel
                 };
@@ -870,7 +1009,7 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/90,
             },
 
             updateCanvasSize(increment) {
-                const currentBase = parseInt(document.getElementById('canvas-display').textContent);
+                const currentBase = CONFIG.canvasBase;
                 const newBase = Utils.clamp(
                     currentBase + increment,
                     CONFIG.CANVAS_BASE_MIN,
@@ -878,10 +1017,10 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/90,
                 );
                 
                 if (newBase !== currentBase) {
-                    document.getElementById('canvas-display').textContent = newBase;
                     CONFIG.canvasBase = newBase;
-                    
                     const { width, height } = Utils.getCanvasSize();
+                    document.getElementById('canvas-display').textContent = `${width}x${height}`;
+                    
                     resizeCanvas(width, height);
                     this.updateColors();
                 }
@@ -960,6 +1099,9 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/90,
             // Initialize canvas
             const { width, height } = Utils.getCanvasSize();
             createCanvas(width, height).parent('canvas-container');
+            
+            // Update canvas size display
+            document.getElementById('canvas-display').textContent = `${width}x${height}`;
             
             // Execute initial code
             executeCode(CODE_VARIATIONS[CONFIG.currentCode]);
