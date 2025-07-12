@@ -1,30 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generative Art & Glasses-Free 3D</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
     <style>
+        /* ===== GLOBAL STYLES ===== */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background-color: #121212; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #121212;
             color: #e0e0e0;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            margin: 0; 
-            padding: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
             min-height: 100vh;
-            text-align: center; 
+            text-align: center;
         }
-        h1 { 
-            color: #ffffff; 
-            font-weight: 300; 
-            margin-bottom: 10px; 
+
+        h1 {
+            color: #ffffff;
+            font-weight: 300;
+            margin-bottom: 10px;
+            font-size: 2rem;
         }
-        
-        /* Menu Bar Styles */
+
+        /* ===== MENU BAR STYLES ===== */
         .menu-bar {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
             border-radius: 12px;
@@ -37,22 +44,25 @@
             align-items: center;
             justify-content: center;
             min-width: 300px;
+            max-width: 1200px;
         }
-        
+
         .menu-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 5px;
         }
-        
+
         .menu-label {
             font-size: 12px;
             color: #b3d9ff;
             font-weight: 500;
+            white-space: nowrap;
         }
-        
-        select, .color-selector {
+
+        /* ===== FORM CONTROLS ===== */
+        select {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 6px;
@@ -61,25 +71,36 @@
             font-size: 14px;
             outline: none;
             transition: all 0.3s ease;
+            min-width: 100px;
         }
-        
-        select:hover, .color-selector:hover {
+
+        select:hover {
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
         }
-        
+
         select:focus {
             background: rgba(255, 255, 255, 0.2);
             border-color: #4dabf7;
             box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.3);
         }
-        
+
+        /* ===== COLOR SELECTORS ===== */
         .color-selector {
             display: flex;
             gap: 8px;
             padding: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
-        
+
+        .color-selector:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
         .color-option {
             width: 12px;
             height: 12px;
@@ -88,36 +109,36 @@
             border: 2px solid transparent;
             transition: all 0.3s ease;
         }
-        
+
         .color-option:hover {
-            transform: scale(1.1);
+            transform: scale(1.2);
             border-color: #ffffff;
         }
-        
+
         .color-option.active {
             border-color: #4dabf7;
             box-shadow: 0 0 0 2px rgba(77, 171, 247, 0.5);
         }
-        
+
         /* Particle Colors */
         .particle-red { background-color: #ff4757; }
         .particle-orange { background-color: #ff7f50; }
         .particle-yellow { background-color: #ffd700; }
         .particle-pure-red { background-color: #ff0000; }
-        
+
         /* Background Colors */
         .bg-blue { background-color: #2040f1; }
         .bg-cyan { background-color: #00b894; }
         .bg-purple { background-color: #6c5ce7; }
         .bg-black { background-color: #000000; }
-        
-        /* Particle Size Controls */
+
+        /* ===== SIZE CONTROLS ===== */
         .size-controls {
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        
+
         .size-button {
             width: 28px;
             height: 28px;
@@ -134,17 +155,17 @@
             transition: all 0.3s ease;
             user-select: none;
         }
-        
+
         .size-button:hover {
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
             transform: scale(1.1);
         }
-        
+
         .size-button:active {
             transform: scale(0.95);
         }
-        
+
         .size-display {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -154,104 +175,110 @@
             color: #ffffff;
             min-width: 20px;
             text-align: center;
+            font-weight: 500;
         }
-        
-        code { 
-            background-color: #2a2a2a; 
-            padding: 10px 15px; 
-            border-radius: 5px; 
-            font-family: "Courier New", monospace; 
-            font-size: 0.7em;
-            display: block; 
-            white-space: pre-wrap; 
-            text-align: center; 
-            margin: 20px 0; 
-        }
-        
+
+        /* ===== CANVAS CONTAINER ===== */
         #canvas-container {
-            margin-top: 20px; 
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2); 
-            border-radius: 8px; 
+            margin-top: 20px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             overflow: hidden;
+            background: #000;
         }
-        
-        a { 
-            color: #4dabf7; 
-            text-decoration: none; 
+
+        /* ===== FORMULA DISPLAY ===== */
+        #formula-display {
+            background-color: #2a2a2a;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: "Courier New", monospace;
+            font-size: 0.7em;
+            display: block;
+            white-space: pre-wrap;
+            text-align: center;
+            margin: 20px 0;
+            max-width: 90vw;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        a:hover { 
-            text-decoration: underline; 
-        }
-        
+
+        /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
             .menu-bar {
                 flex-direction: column;
                 gap: 15px;
+                padding: 15px;
             }
-            
+
             .menu-item {
                 width: 100%;
+                max-width: 250px;
             }
-            
+
             select, .color-selector {
                 width: 100%;
-                max-width: 200px;
             }
+
+            .size-controls {
+                justify-content: center;
+            }
+
+            #formula-display {
+                font-size: 0.6em;
+                padding: 8px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-bar {
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .size-button {
+                width: 24px;
+                height: 24px;
+                font-size: 14px;
+            }
+
+            .color-option {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        /* ===== ACCESSIBILITY ===== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+        /* Focus styles for keyboard navigation */
+        .size-button:focus,
+        .color-option:focus {
+            outline: 2px solid #4dabf7;
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
     <h1 id="main-title">Generative Art & Glasses-Free 3D</h1>
     
-    <!-- Menu Bar -->
-    <div class="menu-bar">
+    <!-- Control Panel -->
+    <div class="menu-bar" role="toolbar" aria-label="Art Generation Controls">
         <div class="menu-item">
-            <label class="menu-label" id="code-label">Code Selection</label>
-            <select id="code-selector">
-            </select>
-        </div>
-        
-        <div class="menu-item">
-            <label class="menu-label" id="particle-label">Particle Color</label>
-            <div class="color-selector" id="particle-colors">
-                <div class="color-option particle-red active" data-color="red"></div>
-                <div class="color-option particle-orange" data-color="orange"></div>
-                <div class="color-option particle-yellow" data-color="yellow"></div>
-                <div class="color-option particle-pure-red" data-color="pure-red"></div>
-            </div>
-        </div>
-        
-        <div class="menu-item">
-            <label class="menu-label" id="bg-label">Background Color</label>
-            <div class="color-selector" id="background-colors">
-                <div class="color-option bg-blue active" data-color="blue"></div>
-                <div class="color-option bg-cyan" data-color="cyan"></div>
-                <div class="color-option bg-purple" data-color="purple"></div>
-                <div class="color-option bg-black" data-color="black"></div>
-            </div>
-        </div>
-        
-        <div class="menu-item">
-            <label class="menu-label" id="size-label">Particle Size</label>
-            <div class="size-controls">
-                <div class="size-button" id="size-decrease">−</div>
-                <div class="size-display" id="size-display">1.6</div>
-                <div class="size-button" id="size-increase">+</div>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <label class="menu-label" id="canvas-label">Canvas Size</label>
-            <div class="size-controls">
-                <div class="size-button" id="canvas-decrease">−</div>
-                <div class="size-display" id="canvas-display">140</div>
-                <div class="size-button" id="canvas-increase">+</div>
-            </div>
-        </div>
-
-        <div class="menu-item">
-            <label class="menu-label" id="lang-label">Language</label>
+            <label class="menu-label" for="language-selector" id="lang-label">Language</label>
             <select id="language-selector">
                 <option value="zh">中文</option>
                 <option value="en">English</option>
@@ -263,28 +290,102 @@
             </select>
         </div>
 
+        <div class="menu-item">
+            <label class="menu-label" id="particle-label">Particle Color</label>
+            <div class="color-selector" role="radiogroup" aria-labelledby="particle-label" id="particle-colors">
+                <div class="color-option particle-red active" data-color="red" role="radio" aria-checked="true" aria-label="Red" tabindex="0"></div>
+                <div class="color-option particle-orange" data-color="orange" role="radio" aria-checked="false" aria-label="Orange" tabindex="-1"></div>
+                <div class="color-option particle-yellow" data-color="yellow" role="radio" aria-checked="false" aria-label="Yellow" tabindex="-1"></div>
+                <div class="color-option particle-pure-red" data-color="pure-red" role="radio" aria-checked="false" aria-label="Pure Red" tabindex="-1"></div>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <label class="menu-label" id="bg-label">Background Color</label>
+            <div class="color-selector" role="radiogroup" aria-labelledby="bg-label" id="background-colors">
+                <div class="color-option bg-blue active" data-color="blue" role="radio" aria-checked="true" aria-label="Blue" tabindex="0"></div>
+                <div class="color-option bg-cyan" data-color="cyan" role="radio" aria-checked="false" aria-label="Cyan" tabindex="-1"></div>
+                <div class="color-option bg-purple" data-color="purple" role="radio" aria-checked="false" aria-label="Purple" tabindex="-1"></div>
+                <div class="color-option bg-black" data-color="black" role="radio" aria-checked="false" aria-label="Black" tabindex="-1"></div>
+            </div>
+        </div>
+        
+        <div class="menu-item">
+            <label class="menu-label" id="size-label">Particle Size</label>
+            <div class="size-controls" role="group" aria-labelledby="size-label">
+                <button class="size-button" id="size-decrease" aria-label="Decrease particle size">−</button>
+                <div class="size-display" id="size-display" aria-live="polite">1.6</div>
+                <button class="size-button" id="size-increase" aria-label="Increase particle size">+</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <label class="menu-label" id="canvas-label">Canvas Size</label>
+            <div class="size-controls" role="group" aria-labelledby="canvas-label">
+                <button class="size-button" id="canvas-decrease" aria-label="Decrease canvas size">−</button>
+                <div class="size-display" id="canvas-display" aria-live="polite">140</div>
+                <button class="size-button" id="canvas-increase" aria-label="Increase canvas size">+</button>
+            </div>
+        </div>
+
+        <div class="menu-item">
+            <label class="menu-label" for="code-selector" id="code-label">Code Selection</label>
+            <select id="code-selector" aria-describedby="code-help">
+                <!-- Options populated by JavaScript -->
+            </select>
+        </div>
     </div>
     
-    <div id="canvas-container"></div>
+    <!-- Canvas Container -->
+    <div id="canvas-container" role="img" aria-label="Generative art visualization"></div>
+    
+    <!-- Formula Display -->
+    <code id="formula-display" role="region" aria-label="Current mathematical formula"></code>
     
     <script>
-        // Configuration objects
-        const config = {
+        // ===== CONFIGURATION AND CONSTANTS =====
+        const CONFIG = {
             particleColor: 'red',
             backgroundColor: 'blue',
             currentCode: 'code1',
-            particleSize: 1.6, // Default particle size
-            canvasBase: 140 // Default canvas base size
+            particleSize: 1.6,
+            canvasBase: 140,
+            
+            // Size limits
+            PARTICLE_SIZE_MIN: 0.5,
+            PARTICLE_SIZE_MAX: 3.0,
+            CANVAS_BASE_MIN: 120,
+            CANVAS_BASE_MAX: 250,
+            
+            // Canvas aspect ratio
+            CANVAS_RATIO_WIDTH: 3,
+            CANVAS_RATIO_HEIGHT: 4
         };
-        
-        // Dynamic canvas size calculation
-        const getCanvasSize = () => ({
-            width: config.canvasBase * 3,
-            height: config.canvasBase * 4
-        });
-        
-        // Language translations
-        const translations = {
+
+        // ===== UTILITY FUNCTIONS =====
+        const Utils = {
+            clamp: (value, min, max) => Math.min(Math.max(value, min), max),
+            
+            getCanvasSize: () => ({
+                width: CONFIG.canvasBase * CONFIG.CANVAS_RATIO_WIDTH,
+                height: CONFIG.canvasBase * CONFIG.CANVAS_RATIO_HEIGHT
+            }),
+            
+            detectBrowserLanguage: () => {
+                const browserLang = navigator.language || navigator.userLanguage;
+                const langCode = browserLang.toLowerCase().substring(0, 2);
+                
+                const supportedLangs = {
+                    'zh': 'zh', 'en': 'en', 'ja': 'ja', 'ko': 'ko',
+                    'de': 'de', 'fr': 'fr', 'ar': 'ar'
+                };
+                
+                return supportedLangs[langCode] || 'en';
+            }
+        };
+
+        // ===== LANGUAGE TRANSLATIONS =====
+        const TRANSLATIONS = {
             zh: {
                 title: '生成艺术 & 裸眼3D',
                 codeLabel: '代码选择',
@@ -293,9 +394,8 @@
                 langLabel: '语言',
                 sizeLabel: '粒子大小',
                 canvasLabel: '画布大小',
-                bgText1: '数学、人工生命、模拟。',
                 bgText2: '数学算法驱动',
-                bgText3: '数学之美 · 代码艺术',
+                bgText3: '数学之美 · 代码艺术'
             },
             en: {
                 title: 'Generative Art & Glasses-Free 3D',
@@ -305,9 +405,8 @@
                 langLabel: 'Language',
                 sizeLabel: 'Particle Size',
                 canvasLabel: 'Canvas Size',
-                bgText1: 'Mathematics, Artificial Life, Simulation.',
                 bgText2: 'Driven by Mathematical Algorithms',
-                bgText3: 'Beauty of Math · Code Art',
+                bgText3: 'Beauty of Math · Code Art'
             },
             ja: {
                 title: 'ジェネラティブアート & 裸眼3D',
@@ -317,9 +416,8 @@
                 langLabel: '言語',
                 sizeLabel: 'パーティクルサイズ',
                 canvasLabel: 'キャンバスサイズ',
-                bgText1: '数学、人工生命、シミュレーション。',
                 bgText2: '数学アルゴリズム駆動',
-                bgText3: '数学の美・コードアート',
+                bgText3: '数学の美・コードアート'
             },
             ko: {
                 title: '생성 예술 & 무안경 3D',
@@ -329,9 +427,8 @@
                 langLabel: '언어',
                 sizeLabel: '입자 크기',
                 canvasLabel: '캔버스 크기',
-                bgText1: '수학, 인공생명, 시뮬레이션.',
                 bgText2: '수학적 알고리즘 기반',
-                bgText3: '수학의 아름다움 · 코드 예술',
+                bgText3: '수학의 아름다움 · 코드 예술'
             },
             de: {
                 title: 'Generative Kunst & 3D ohne Brille',
@@ -341,9 +438,8 @@
                 langLabel: 'Sprache',
                 sizeLabel: 'Teilchengröße',
                 canvasLabel: 'Bildschirmgröße',
-                bgText1: 'Mathematik, künstliche Lebewesen, Simulation.',
                 bgText2: 'Durch mathematische Algorithmen angetrieben',
-                bgText3: 'Schönheit der Mathematik · Codekunst',
+                bgText3: 'Schönheit der Mathematik · Codekunst'
             },
             fr: {
                 title: 'Art Générative & 3D sans Lunettes',
@@ -353,9 +449,8 @@
                 langLabel: 'Langue',
                 sizeLabel: 'Taille des Particules',
                 canvasLabel: 'Taille de l\'Écran',
-                bgText1: 'Mathématiques, Vie Artificielle, Simulation.',
                 bgText2: 'Propulsé par des Algorithmes Mathématiques',
-                bgText3: 'Beauté des Mathématiques · Art de Code',
+                bgText3: 'Beauté des Mathématiques · Art de Code'
             },
             ar: {
                 title: 'فن جنراتيف & 3D بدون عدسات',
@@ -365,14 +460,13 @@
                 langLabel: 'اللغة',
                 sizeLabel: 'حجم الجسيمات',
                 canvasLabel: 'حجم الشاشة',
-                bgText1: 'الرياضيات، الحياة الاصطناعية، التشابه.',
                 bgText2: 'منطوق بأساليب رياضية',
-                bgText3: 'جمال الرياضيات · الفن البرمجي',
+                bgText3: 'جمال الرياضيات · الفن البرمجي'
             }
         };
-        
-        // Color configurations
-        const colors = {
+
+        // ===== COLOR DEFINITIONS =====
+        const COLORS = {
             particle: {
                 red: [247, 8, 145],
                 orange: [255, 127, 80],
@@ -386,9 +480,9 @@
                 black: [0, 0, 0]
             }
         };
-        
-        // Code variations
-        const codeVariations = {
+
+        // ===== CODE VARIATIONS =====
+        const CODE_VARIATIONS = {
             code1: `a=(x,y,d=mag(k=(4+sin(y*2-t)*3)*cos(x/29),e=y/8-13))=>point((q=3*sin(k*2)+.3/k+sin(y/25)*k*(9+4*sin(e*9-d*3+t*2)))+30*cos(c=d-t)+200,q*sin(c)+d*39-220)
 t=0,draw=$=>{t||createCanvas(w=400,w);background(9).stroke(w,96);for(t+=PI/240,i=1e4;i--;)a(i,i/235)} // From: x/yuruyurao`,
             code2: `a=(x,y,d=mag(k=5*cos(x/19)*cos(y/30),e=y/8-12)**2/59+2)=>point((q=4*sin(atan2(k,e)*9)+9*sin(d-t)-k/d*(9+sin(d*9-t*16)*3))+50*cos(c=d*d/7-t)+200,q*sin(c)+d*45-9)
@@ -465,215 +559,251 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/60,
 t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,66);for(t+=PI/120,y=99;++y<300;)for(x=99;++x<300;)point(...a(x,y))} // From: x/yuruyurao`,
             code37: `a=(x,y,d=5*cos(mag(k=x/8-25,e=y/8-25)/3))=>[(x+d*k*sin(d*2.5-t)+k/2*sin(y/3+t))/2+100,d*19+(d-2)*5*abs(cos(d/2-t/2))+d*e+215]
 t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,66);for(t+=PI/60,y=100;y<300;y++)for(x=100;x<300;x++)point(...a(x,y))} // From: x/yuruyurao`,
+            code38: `a=(i,D=i%2-.5,y=i/990,k=(5-sin(y*2-t)*3)*cos(i),e=y/8-9,d=(k*k+e*e)**.6,q=sin(y)*k*e,P=d-t*3)=>point((q+9*cos(P/D+D)+560/4) * 420 / 560 + 90, (D*(d*92 - 990)+300+D*cos(t)*99) / 2.1 + 60)
+t=0,draw=$=>{t||createCanvas(w=400,w);background(255).stroke(0,96);for(t+=PI/90,i=1e4;i--;)a(i)} // Dwitter/rodrigo.siqueira`,
+            code39: `a=()=>{background(0,0,0,18);q=sin(t);for(i=6e3;i--;){X=cos(i);Y=cos(i*i);Z=cos(i**3);p=cos(t);l=cos(t/2);k=sin(t/2);d=X*q*l+Y*p*l-Z*k+5;let px=(X*p-Y*q)/d*200+200,py=((X*q+Y*p)*k+Z*l)/d*200+200;if(px>=0&&px<=400&&py>=0&&py<=400&&d>0.1)point(px,py)}}
+t=0,draw=$=>{t||createCanvas(w=400,w);t+=PI/90;a()} // Dwitter/skeletonNatte`,
+            code40: `a=(x,y,d=mag(k=x/8-12.5,e=y/8-12.5),o=sin(d/4+t)*cos(k/5))=>point((x+k*o*sin(d*2+t))*cos(c=d/3-t/8)+200,(y+e*o*cos(d*2+t))*sin(c)+200)
+t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/90,i=4e4;i--;)a(i%200,i/200)} // Dwitter-style pattern`
         };
 
-        // Background text with current language
-        let currentLang = 'en'; // Default to English
-        
-        // Detect browser language
-        const detectBrowserLanguage = () => {
-            // Get browser language
-            const browserLang = navigator.language || navigator.userLanguage;
-            const langCode = browserLang.toLowerCase().substring(0, 2);
-            
-            // Map browser language codes to our supported languages
-            const supportedLangs = {
-                'zh': 'zh',
-                'en': 'en', 
-                'ja': 'ja',
-                'ko': 'ko',
-                'de': 'de',
-                'fr': 'fr',
-                'ar': 'ar'
-            };
-            
-            // Return supported language or default to English
-            return supportedLangs[langCode] || 'en';
+        // ===== APPLICATION STATE =====
+        let currentLang = 'en';
+
+        const initCanvas = () => {
+            const { width, height } = Utils.getCanvasSize();
+            createCanvas(width, height).parent('canvas-container');
         };
-        
+
         const drawBackgroundText = () => {
             noStroke();
             textAlign(CENTER, CENTER);
             textFont('Arial, sans-serif');
-            const lang = translations[currentLang];
-            
-            // Use blue text for black background, otherwise use black text
-            const isBlackBackground = config.backgroundColor === 'black';
+                
+            const lang = TRANSLATIONS[currentLang];
+            const isBlackBackground = CONFIG.backgroundColor === 'black';
             const textColor = isBlackBackground ? [5, 25, 255] : [0, 0, 0];
-            
-            const { width, height } = getCanvasSize();
-
-            const scaleFactor = config.canvasBase / 140;
-            
+            const { width, height } = Utils.getCanvasSize();
+            const scaleFactor = CONFIG.canvasBase / 140;
+                
             for (let offset = 0; offset < 5; offset++) {
-                fill(textColor[0], textColor[1], textColor[2], isBlackBackground ? (150 - offset * 40) : (90 - offset * 40) );
+                const opacity = isBlackBackground ? (150 - offset * 40) : (90 - offset * 40);
+                fill(textColor[0], textColor[1], textColor[2], opacity);
                 textSize(20 * scaleFactor);
-                text(lang.bgText1, width/2 + offset, height / 3 - 20 * scaleFactor + offset);
+                    
                 text(lang.bgText2, width/2 + offset, height / 3 + offset);
-                textSize(20 * scaleFactor);
                 text(lang.bgText3, width/2 + offset, height / 3 * 2 + offset);
             }
         };
 
         const refreshBackground = () => {
-            const bgColor = colors.background[config.backgroundColor];
+            const bgColor = COLORS.background[CONFIG.backgroundColor];
             background(bgColor[0], bgColor[1], bgColor[2]);
             drawBackgroundText();
-            
-            const particleColor = colors.particle[config.particleColor];
+                
+            const particleColor = COLORS.particle[CONFIG.particleColor];
             stroke(particleColor[0], particleColor[1], particleColor[2], 120);
-            strokeWeight(config.particleSize); // Apply particle size
-        }
+            strokeWeight(CONFIG.particleSize);
+        };
 
         const drawPoint = (x, y) => {
-            // Scale coordinates based on canvas size (base 140 = scale factor 1.0)
-            const scaleFactor = config.canvasBase / 140;
-            point(x * scaleFactor, y * scaleFactor * 4 / 3);
-        }
+            const scaleFactor = CONFIG.canvasBase / 140;
+            point((x + 10) * scaleFactor, (y + 10) * scaleFactor * 4 / 3);
+        };
 
-        const init = () => {
-            const { width, height } = getCanvasSize();
-            createCanvas(width, height).parent('canvas-container');
-        }
-
+        // ===== P5.JS FUNCTIONS =====
         const executeCode = (codeString) => {
-            // replace createCanvas and background
-            codeString = codeString.replace(/createCanvas\([^)]*\)[^;]*;([^f]*(?=for))/g, 'init();refreshBackground();');
+            // replace createCanvas() with initCanvas()
+            codeString = codeString.replace(/createCanvas\([^)]*\);/g, 'initCanvas();');
+            // replace background() with refreshBackground()
+            codeString = codeString.replace(/background[^;]*;/g, 'refreshBackground();');
             // replace point with drawPoint
             codeString = codeString.replace('point', 'drawPoint');
-            eval(codeString);
-        }
-        
-        // Update formula display
-        const updateFormulaDisplay = (codeKey) => {
-            const formulaDisplay = document.getElementById('formula-display');
-            const selectedCode = codeVariations[codeKey];
-            
-            if (selectedCode) {
-                // Extract the formula part (before the first occurrence of 't=0,draw=')
-                const formulaPart = selectedCode.split('t=0,draw=')[0].trim();
-                const drawPart = selectedCode.split('t=0,draw=')[1];
+            try {   
+                // Execute the code in global scope
+                eval(codeString);
+            } catch (error) {
+                console.error('Code execution error:', error);
+                console.log('Failed code:', codeString);
+            }
+        };
+
+        // ===== UI MANAGEMENT =====
+        const UI = {
+            updateLanguage(langCode) {
+                currentLang = langCode;
+                const lang = TRANSLATIONS[langCode];
                 
-                formulaDisplay.innerHTML = `<span style="color: #4dabf7;">${formulaPart}</span><br>
-                    <span style="color: #ffd700;">t=0,draw=${drawPart}</span>`;
+                // Update UI text elements
+                const elements = {
+                    'main-title': lang.title,
+                    'code-label': lang.codeLabel,
+                    'particle-label': lang.particleLabel,
+                    'bg-label': lang.bgLabel,
+                    'lang-label': lang.langLabel,
+                    'size-label': lang.sizeLabel,
+                    'canvas-label': lang.canvasLabel
+                };
+                
+                Object.entries(elements).forEach(([id, text]) => {
+                    const element = document.getElementById(id);
+                    if (element) element.textContent = text;
+                });
+                
+                this.updateCodeSelector();
+                document.getElementById('language-selector').value = langCode;
+            },
+
+            updateCodeSelector() {
+                const codeSelector = document.getElementById('code-selector');
+                codeSelector.innerHTML = '';
+                
+                Object.keys(CODE_VARIATIONS).forEach(key => {
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = `Code ${key.replace('code', '')}`;
+                    if (key === CONFIG.currentCode) option.selected = true;
+                    codeSelector.appendChild(option);
+                });
+            },
+
+            updateFormulaDisplay(codeKey) {
+                const formulaDisplay = document.getElementById('formula-display');
+                const selectedCode = CODE_VARIATIONS[codeKey];
+                
+                if (selectedCode && formulaDisplay) {
+                    const parts = selectedCode.split('t=0,draw=');
+                    const formulaPart = parts[0].trim();
+                    const drawPart = parts[1] || '';
+                    
+                    formulaDisplay.innerHTML = `<span style="color: #4dabf7;">${formulaPart}</span><br><span style="color: #ffd700;">t=0,draw=${drawPart}</span>`;
+                }
+            },
+
+            updateColors() {
+                clear();
+                executeCode(CODE_VARIATIONS[CONFIG.currentCode]);
+            },
+
+            updateParticleSize(increment) {
+                const currentSize = parseFloat(document.getElementById('size-display').textContent);
+                const newSize = Utils.clamp(
+                    currentSize + increment,
+                    CONFIG.PARTICLE_SIZE_MIN,
+                    CONFIG.PARTICLE_SIZE_MAX
+                );
+                
+                if (newSize !== currentSize) {
+                    document.getElementById('size-display').textContent = newSize.toFixed(1);
+                    CONFIG.particleSize = newSize;
+                    this.updateColors();
+                }
+            },
+
+            updateCanvasSize(increment) {
+                const currentBase = parseInt(document.getElementById('canvas-display').textContent);
+                const newBase = Utils.clamp(
+                    currentBase + increment,
+                    CONFIG.CANVAS_BASE_MIN,
+                    CONFIG.CANVAS_BASE_MAX
+                );
+                
+                if (newBase !== currentBase) {
+                    document.getElementById('canvas-display').textContent = newBase;
+                    CONFIG.canvasBase = newBase;
+                    
+                    const { width, height } = Utils.getCanvasSize();
+                    resizeCanvas(width, height);
+                    this.updateColors();
+                }
             }
-        };
-        
-        // Event handlers
-        const updateLanguage = (langCode) => {
-            currentLang = langCode;
-            const lang = translations[langCode];
-            
-            // Update UI text
-            document.getElementById('main-title').textContent = lang.title;
-            document.getElementById('code-label').textContent = lang.codeLabel;
-            document.getElementById('particle-label').textContent = lang.particleLabel;
-            document.getElementById('bg-label').textContent = lang.bgLabel;
-            document.getElementById('lang-label').textContent = lang.langLabel;
-            document.getElementById('size-label').textContent = lang.sizeLabel;
-            document.getElementById('canvas-label').textContent = lang.canvasLabel;
-            
-            // Update code selector options to show code numbers
-            const codeSelector = document.getElementById('code-selector');
-            codeSelector.innerHTML = '';
-            Object.keys(codeVariations).forEach(key => {
-                const option = document.createElement('option');
-                option.value = key;
-                // Show code number (extract number from key like 'code1' -> '1')
-                const codeNumber = key.replace('code', '');
-                option.textContent = `Code ${codeNumber}`;
-                if (key === config.currentCode) option.selected = true;
-                codeSelector.appendChild(option);
-            });
-            
-            // Update language selector to reflect current selection
-            document.getElementById('language-selector').value = langCode;
-        };
-        
-        const updateColors = () => {
-            // Reset canvas and restart animation
-            clear();
-            executeCode(codeVariations[config.currentCode]);
         };
 
-        const updateParticleSize = (increment) => {
-            const newSize = parseFloat(document.getElementById('size-display').textContent) + increment;
-            if (newSize >= 0.5 && newSize <= 3) { // Example range for particle size
-                document.getElementById('size-display').textContent = newSize.toFixed(1);
-                config.particleSize = newSize;
-                updateColors();
+        // ===== EVENT HANDLERS =====
+        const EventHandlers = {
+            setupColorSelectors() {
+                // Particle color selection
+                document.querySelectorAll('#particle-colors .color-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        document.querySelectorAll('#particle-colors .color-option').forEach(o => {
+                            o.classList.remove('active');
+                            o.setAttribute('aria-checked', 'false');
+                            o.setAttribute('tabindex', '-1');
+                        });
+                        
+                        option.classList.add('active');
+                        option.setAttribute('aria-checked', 'true');
+                        option.setAttribute('tabindex', '0');
+                        CONFIG.particleColor = option.dataset.color;
+                        UI.updateColors();
+                    });
+                });
+                
+                // Background color selection
+                document.querySelectorAll('#background-colors .color-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        document.querySelectorAll('#background-colors .color-option').forEach(o => {
+                            o.classList.remove('active');
+                            o.setAttribute('aria-checked', 'false');
+                            o.setAttribute('tabindex', '-1');
+                        });
+                        
+                        option.classList.add('active');
+                        option.setAttribute('aria-checked', 'true');
+                        option.setAttribute('tabindex', '0');
+                        CONFIG.backgroundColor = option.dataset.color;
+                        UI.updateColors();
+                    });
+                });
+            },
+
+            setupControlButtons() {
+                // Particle size controls
+                document.getElementById('size-decrease').addEventListener('click', () => UI.updateParticleSize(-0.1));
+                document.getElementById('size-increase').addEventListener('click', () => UI.updateParticleSize(0.1));
+                
+                // Canvas size controls
+                document.getElementById('canvas-decrease').addEventListener('click', () => UI.updateCanvasSize(-10));
+                document.getElementById('canvas-increase').addEventListener('click', () => UI.updateCanvasSize(10));
+            },
+
+            setupSelectors() {
+                // Code selector
+                document.getElementById('code-selector').addEventListener('change', (e) => {
+                    CONFIG.currentCode = e.target.value;
+                    clear();
+                    executeCode(CODE_VARIATIONS[CONFIG.currentCode]);
+                    UI.updateFormulaDisplay(CONFIG.currentCode);
+                });
+                
+                // Language selector
+                document.getElementById('language-selector').addEventListener('change', (e) => {
+                    UI.updateLanguage(e.target.value);
+                });
             }
         };
 
-        const updateCanvasSize = (increment) => {
-            const newBase = parseInt(document.getElementById('canvas-display').textContent) + increment;
-            if (newBase >= 120 && newBase <= 250) { // Canvas base range 100-300
-                document.getElementById('canvas-display').textContent = newBase;
-                config.canvasBase = newBase; // Update the base size
-                const { width, height } = getCanvasSize();
-                resizeCanvas(width, height);
-                updateColors();
-            }
-        };
-        
-        // Initialize p5.js
+        // ===== INITIALIZATION =====
         function setup() {
             // Detect and set browser language
-            const detectedLang = detectBrowserLanguage();
-            currentLang = detectedLang;
-
-            const { width, height } = getCanvasSize();
-            createCanvas(width, height).parent('canvas-container');
-            executeCode(codeVariations[config.currentCode]);
-            updateFormulaDisplay(config.currentCode); // Initialize formula display
+            currentLang = Utils.detectBrowserLanguage();
             
-            // Update UI with detected language
-            updateLanguage(detectedLang);
+            // Initialize canvas
+            const { width, height } = Utils.getCanvasSize();
+            createCanvas(width, height).parent('canvas-container');
+            
+            // Execute initial code
+            executeCode(CODE_VARIATIONS[CONFIG.currentCode]);
+            
+            // Update UI
+            UI.updateLanguage(currentLang);
+            UI.updateFormulaDisplay(CONFIG.currentCode);
             
             // Setup event listeners
-            document.getElementById('code-selector').addEventListener('change', (e) => {
-                config.currentCode = e.target.value;
-                clear();
-                executeCode(codeVariations[config.currentCode]);
-                updateFormulaDisplay(config.currentCode); // Update formula display on code change
-            });
-            
-            document.getElementById('language-selector').addEventListener('change', (e) => {
-                updateLanguage(e.target.value);
-            });
-            
-            // Particle color selection
-            document.querySelectorAll('#particle-colors .color-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    document.querySelectorAll('#particle-colors .color-option').forEach(o => o.classList.remove('active'));
-                    option.classList.add('active');
-                    config.particleColor = option.dataset.color;
-                    updateColors();
-                });
-            });
-            
-            // Background color selection
-            document.querySelectorAll('#background-colors .color-option').forEach(option => {
-                option.addEventListener('click', () => {
-                    document.querySelectorAll('#background-colors .color-option').forEach(o => o.classList.remove('active'));
-                    option.classList.add('active');
-                    config.backgroundColor = option.dataset.color;
-                    updateColors();
-                });
-            });
-
-            // Particle size controls
-            document.getElementById('size-decrease').addEventListener('click', () => updateParticleSize(-0.1));
-            document.getElementById('size-increase').addEventListener('click', () => updateParticleSize(0.1));
-
-            // Canvas size controls
-            document.getElementById('canvas-decrease').addEventListener('click', () => updateCanvasSize(-10));
-            document.getElementById('canvas-increase').addEventListener('click', () => updateCanvasSize(10));
+            EventHandlers.setupColorSelectors();
+            EventHandlers.setupControlButtons();
+            EventHandlers.setupSelectors();
         }
     </script>
-
-<code id="formula-display">
-</code>
-    
 </body>
 </html>
