@@ -1,6 +1,8 @@
 # ジェネラティブアート &amp; 裸眼3D
 
-[英文版](README.md) | [中国語版](README_zh.md)
+## [オンラインデモ](https://shanehsu08.github.io/GenerativeArt3D/genart3d.html)
+
+[English](README.md) | [中国語](README_zh.md)
 
 ## UIプレビュー
 

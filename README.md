@@ -1,6 +1,8 @@
 # Generative Art & Glasses-Free 3D
 
-[中文版](README_zh.md) | [日本語版](README_ja.md)
+## [Demo Online](https://shanehsu08.github.io/GenerativeArt3D/genart3d.html)
+
+[中文](README_zh.md) | [日本語](README_ja.md)
 
 ## UI Preview
 
@@ -184,5 +186,6 @@ MIT License
 For questions, suggestions, or new formula submissions, please create a GitHub Issue.
 
 ---
+## [Demo Online](https://shanehsu08.github.io/GenerativeArt3D/genart3d.html)
 
 *Where math and art merge in code* ✨ 

@@ -1,6 +1,8 @@
 # 生成艺术与裸眼3D (Generative Art & Glasses-Free 3D)
 
-[英文版](README.md) | [日本語版](README_ja.md)
+## [在线演示](https://shanehsu08.github.io/GenerativeArt3D/genart3d.html)
+
+[English](README.md) | [日本語](README_ja.md)
 
 ## 界面预览
 
