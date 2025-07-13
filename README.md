@@ -1,6 +1,6 @@
 # Generative Art & Glasses-Free 3D
 
-[中文版](README_zh.md) | [日文版](README_ja.md)
+[中文版](README_zh.md) | [日本語版](README_ja.md)
 
 ## UI Preview
 

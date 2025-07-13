@@ -1,6 +1,6 @@
 # 生成艺术与裸眼3D (Generative Art & Glasses-Free 3D)
 
-[英文版](README.md) | [日文版](README_ja.md)
+[英文版](README.md) | [日本語版](README_ja.md)
 
 ## 界面预览
 

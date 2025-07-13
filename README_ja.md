@@ -1,6 +1,6 @@
 # ジェネラティブアート &amp; 裸眼3D
 
-[英文版](README.md) | [中文版](README_zh.md)
+[英文版](README.md) | [中国語版](README_zh.md)
 
 ## UIプレビュー
 
