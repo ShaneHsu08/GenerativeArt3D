@@ -35,7 +35,7 @@ This project's main contribution is the **systematic organization of these sophi
 ## Features
 
 ### 🎨 Diverse Artistic Effects
-- **40 Different Code Variations**: Each based on a unique mathematical formula for distinct visuals.
+- **42 Different Code Variations**: Each based on a unique mathematical formula for distinct visuals.
 - **Real-time Animation**: Dynamic effects driven by a time variable for fluid particle motion.
 - **Math-Driven**: Art generated using trigonometric functions, exponential functions, and more.
 
@@ -127,7 +127,7 @@ npx http-server
 5. **Save Image**: Click the camera icon to save the artwork as a high-quality PNG file. The filename is automatically generated (e.g., `generative-art-5-1672531200.png`).
 
 ### Parameter Guide
-- **Code Selection**: Choose from 40 different mathematical algorithms, each creating a unique visual.
+- **Code Selection**: Choose from 42 different mathematical algorithms, each creating a unique visual.
 - **Particle Color**: Sets the color of the moving points. To best experience the 3D effect, use a Red/Orange particle on a Blue/Black background.
 - **Background Color**: Sets the canvas background color.
 - **Particle Size**: Controls the diameter of the drawn points.
