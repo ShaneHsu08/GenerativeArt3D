@@ -215,9 +215,63 @@
 
         /* Background Colors */
         .bg-blue { background: linear-gradient(135deg, #2196f3, #1976d2); }
-        .bg-cyan { background: linear-gradient(135deg, #00bcd4, #0097a7); }
-        .bg-purple { background: linear-gradient(135deg, #9c27b0, #7b1fa2); }
         .bg-black { background: linear-gradient(135deg, #424242, #212121); }
+
+        /* Background Image Options */
+        .bg-image-none { 
+            background: linear-gradient(135deg, #9e9e9e, #616161); 
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bg-image-1 { 
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bg-image-2 { 
+            background: linear-gradient(135deg, #4caf50, #388e3c);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bg-image-3 { 
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bg-image-4 { 
+            background: linear-gradient(135deg, #e91e63, #c2185b);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bg-image-5 { 
+            background: linear-gradient(135deg, #00bcd4, #0097a7);
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         /* ===== SIZE CONTROLS ===== */
         .size-controls {
@@ -579,12 +633,13 @@
             </div>
             
             <div class="control-group">
-                <label class="control-label" id="bg-label">Background Color</label>
-                <div class="color-selector" role="radiogroup" aria-labelledby="bg-label" id="background-colors">
-                    <div class="color-option bg-blue active" data-color="blue" role="radio" aria-checked="true" aria-label="Blue" tabindex="0"></div>
-                    <div class="color-option bg-cyan" data-color="cyan" role="radio" aria-checked="false" aria-label="Cyan" tabindex="-1"></div>
-                    <div class="color-option bg-purple" data-color="purple" role="radio" aria-checked="false" aria-label="Purple" tabindex="-1"></div>
-                    <div class="color-option bg-black" data-color="black" role="radio" aria-checked="false" aria-label="Black" tabindex="-1"></div>
+                <label class="control-label" id="bg-label">Background</label>
+                <div class="color-selector" role="radiogroup" aria-labelledby="bg-label" id="background-options">
+                    <div class="color-option bg-blue active" data-type="color" data-value="blue" role="radio" aria-checked="true" aria-label="Blue" tabindex="0"></div>
+                    <div class="color-option bg-black" data-type="color" data-value="black" role="radio" aria-checked="false" aria-label="Black" tabindex="-1"></div>
+                    <div class="color-option bg-image-1" data-type="image" data-value="0" role="radio" aria-checked="false" aria-label="Background 1" tabindex="-1">1</div>
+                    <div class="color-option bg-image-2" data-type="image" data-value="1" role="radio" aria-checked="false" aria-label="Background 2" tabindex="-1">2</div>
+                    <div class="color-option bg-image-3" data-type="image" data-value="2" role="radio" aria-checked="false" aria-label="Background 3" tabindex="-1">3</div>
                 </div>
             </div>
             
@@ -677,6 +732,7 @@
         const CONFIG = {
             particleColor: 'red',
             backgroundColor: 'blue',
+            backgroundImage: 'none',
             currentCode: 'code1',
             particleSize: 1.6,
             canvasBase: 140,
@@ -711,6 +767,28 @@
                 };
                 
                 return supportedLangs[langCode] || 'en';
+            },
+
+            getUrlParameter: (name) => {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            },
+
+            updateUrlParameter: (name, value) => {
+                const url = new URL(window.location);
+                url.searchParams.set(name, value);
+                window.history.replaceState({}, '', url);
+            },
+
+            getValidCodeFromUrl: () => {
+                const codeParam = Utils.getUrlParameter('code');
+                if (codeParam) {
+                    const codeKey = `code${codeParam}`;
+                    if (CODE_VARIATIONS[codeKey]) {
+                        return codeKey;
+                    }
+                }
+                return null;
             }
         };
 
@@ -720,7 +798,7 @@
                 title: '生成艺术 & 裸眼3D',
                 codeLabel: '代码选择',
                 particleLabel: '粒子颜色',
-                bgLabel: '背景颜色',
+                bgLabel: '背景',
                 langLabel: '语言',
                 sizeLabel: '粒子大小',
                 canvasLabel: '画布大小',
@@ -735,7 +813,7 @@
                 title: 'Generative Art & Glasses-Free 3D',
                 codeLabel: 'Code Selection',
                 particleLabel: 'Particle Color',
-                bgLabel: 'Background Color',
+                bgLabel: 'Background',
                 langLabel: 'Language',
                 sizeLabel: 'Particle Size',
                 canvasLabel: 'Canvas Size',
@@ -750,7 +828,7 @@
                 title: 'ジェネラティブアート & 裸眼3D',
                 codeLabel: 'コード選択',
                 particleLabel: 'パーティクル色',
-                bgLabel: '背景色',
+                bgLabel: '背景',
                 langLabel: '言語',
                 sizeLabel: 'パーティクルサイズ',
                 canvasLabel: 'キャンバスサイズ',
@@ -765,7 +843,7 @@
                 title: '생성 예술 & 무안경 3D',
                 codeLabel: '코드 선택',
                 particleLabel: '입자 색상',
-                bgLabel: '배경 색상',
+                bgLabel: '배경',
                 langLabel: '언어',
                 sizeLabel: '입자 크기',
                 canvasLabel: '캔버스 크기',
@@ -780,7 +858,7 @@
                 title: 'Generative Kunst & 3D ohne Brille',
                 codeLabel: 'Codeauswahl',
                 particleLabel: 'Teilchenfarbe',
-                bgLabel: 'Hintergrundfarbe',
+                bgLabel: 'Hintergrund',
                 langLabel: 'Sprache',
                 sizeLabel: 'Teilchengröße',
                 canvasLabel: 'Bildschirmgröße',
@@ -795,7 +873,7 @@
                 title: 'Art Générative & 3D sans Lunettes',
                 codeLabel: 'Sélection de Code',
                 particleLabel: 'Couleur des Particules',
-                bgLabel: 'Couleur de Fond',
+                bgLabel: 'Arrière-plan',
                 langLabel: 'Langue',
                 sizeLabel: 'Taille des Particules',
                 canvasLabel: 'Taille de l\'Écran',
@@ -810,7 +888,7 @@
                 title: 'فن جنراتيف & 3D بدون عدسات',
                 codeLabel: 'اختيار الكود',
                 particleLabel: 'لون الجسيمات',
-                bgLabel: 'لون الخلفية',
+                bgLabel: 'الخلفية',
                 langLabel: 'اللغة',
                 sizeLabel: 'حجم الجسيمات',
                 canvasLabel: 'حجم الشاشة',
@@ -833,8 +911,6 @@
             },
             background: {
                 blue: [0, 0, 255],
-                cyan: [0, 255, 255],
-                purple: [75, 0, 130],
                 black: [0, 0, 0]
             }
         };
@@ -924,13 +1000,41 @@ t=0,draw=$=>{t||createCanvas(w=400,w);t+=PI/90;a()} // Dwitter/skeletonNatte`,
             code40: `a=(x,y,d=mag(k=x/8-12.5,e=y/8-12.5),o=sin(d/4+t)*cos(k/5))=>point((x+k*o*sin(d*2+t))*cos(c=d/3-t/8)+200,(y+e*o*cos(d*2+t))*sin(c)+200)
 t=0,draw=$=>{t||createCanvas(w=400,w);background(6).stroke(255,96);for(t+=PI/90,i=4e4;i--;)a(i%200,i/200)} // Dwitter-style pattern`,
             code41: `a=(i)=>{r=sin(i*i),Z=cos(sin(i*3+t))*80,k=i+r*r/2,point(200-sin(k)*Z, 190+cos(k)*Z+r*120)} 
-t=0,draw=$=>{t||createCanvas(w=400,w);background(9).fill(w);for(t+=PI/240,i=4e4;i--;)a(i)} // Dwitter/rodrigo.siqueira`,
+t=0,draw=$=>{t||createCanvas(w=400,w);background(9).fill(w);for(t+=PI/240,i=4e4;i--;)a(i)} // Converted from Dwitter/rodrigo.siqueira`,
             code42: `a=(x,y,o=mag(k=x/6-15,e=y/7-18)/8,d=3*sin(o*2+t)*cos(k/4+e/3))=>point((q=x/3+80+k*d*(1+cos(o*3-t*1.5))*sin(e/5+t/3))*cos(c=o*d/20-t/6)+200,(q*0.8+70+e*d*sin(o*2+t/2))*sin(c)+d*12*cos(c*1.3)+200)
-t=0,draw=$=>{t||createCanvas(w=400,w);background(6,20).stroke(255,80);for(t+=PI/75,i=3e4;i--;)a(i%180,i/180)} // Original creation - Organic Spiral Morphing`
+t=0,draw=$=>{t||createCanvas(w=400,w);background(6,20).stroke(255,80);for(t+=PI/75,i=3e4;i--;)a(i%180,i/180)} // Original creation - Organic Spiral Morphing`,
+            code43: `a=(i,j=i%4,k=i%3)=>point(73+k*120+12*cos(i+k*3-t*(j+3))-27*cos(i)+10*sin(i*i), 50+j*100+25*sin(i+t)+9*cos(i*i))
+t=0,draw=$=>{t||createCanvas(w=400,w);background(0);for(t+=PI/90,i=2e4;i--;)a(i)} // Converted from Dwitter/rodrigo.siqueira`,
+            code44: `a=(i,N=1e4,X=tan(i)*i%2,Y=tan(i*N)%2,Z=.7/tan(t-X*X+Y*Y))=>Z>0&&point(200+X*125/Z,175+Y*125/Z)
+t=0,draw=$=>{t||createCanvas(w=400,w);background(255).stroke(0,96);for(t+=PI/120,i=1e4;i--;)a(i)} // Converted from Dwitter/rodrigo.siqueira`,
+            code45: `v=(a,b,g,r)=>{if(r<1)return;for(i=0;i<r/4;i++)point((b-=cos(g)*4)-150,(a+=sin(g)*4)+100);v(a,b,g+o,r*.7);v(a,b,g-o,r*.7)}
+t=0,draw=$=>{t||createCanvas(w=400,w);background(0).stroke(255,120);t+=PI/90;o=sin(t)/3+0.5;v(200,350,-PI/2,60)} // Original creation`,
+            code46: `a=()=>{for(i=0;i<440;i++){d=cos(t/4+i);s=i==0?12:abs(4-d*3);fill(i%255,i%200,i%100,25);circle(sin(t*2.5/4+i)*90*sin(cos(t/4)+i%50)+200,i/0.9+20,s)}}
+t=0,draw=$=>{t||createCanvas(w=400,w);background(255,20);t+=PI/60;a()} // Converted from Dwitter dynamic particle stream`,
+            code47: `drawWave=()=>{for(k=511;k--;){i=k>>5;j=k%32;fill(255-j*8,100+j*5,255,120);W=99*sin(j/10)*sin(angle=t+i*27);rect(210-W/2-220*sin(j/41)*cos(angle),220-j*(i/4+sin(angle)),W,3)}}
+t=0,draw=$=>{t||createCanvas(w=400,w);background(0,30);t+=PI/480;drawWave()} // Converted from Dwitter 3D wave grid`,
+            code48: `a=(x,y,d=mag(k=(4+cos(x/9-t))*cos(x/30),e=y/7-13)+sin(y/99+t/2)-4)=>point((q=3*sin(k*2)+sin(y/29)*k*(9+2*sin(cos(e)*9-d*4+t)))+40*cos(c=d-t)+200,q*sin(c)+d*35)
+t=0,draw=$=>{t||createCanvas(w=400,w);background(9).stroke(w,96);for(t+=PI/120,i=1e4;i--;)a(i,i/235)}`
         };
 
         // ===== APPLICATION STATE =====
         let currentLang = 'en';
+        let backgroundImages = {};
+
+        function preload() {
+            for (let i = 0; i < 5; i++) {
+                // 预加载不同纵横比的背景图片，带错误处理
+                backgroundImages[i] = loadImage(`images/background-${i}.png`, 
+                    () => console.log(`✅ images/background-${i}.png loaded.`),
+                    () => {
+                        console.log(`❌ images/background-${i}.png no exist`);
+                        backgroundImages[i] = null;
+                    }
+                );
+            }
+            
+            console.log('background images preloadding...');
+        }
 
         const initCanvas = () => {
             const { width, height } = Utils.getCanvasSize();
@@ -960,34 +1064,104 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6,20).stroke(255,80);for(t+=PI/
         };
 
         const refreshBackground = () => {
-            const bgColor = COLORS.background[CONFIG.backgroundColor];
-            background(bgColor[0], bgColor[1], bgColor[2]);
-            drawBackgroundText();
+            let useBackgroundImage = false;
+            
+            // Check if a background image is selected and available
+            if (CONFIG.backgroundImage !== 'none') {
+                const bgImageIndex = parseInt(CONFIG.backgroundImage);
+                const currentBgImage = backgroundImages[bgImageIndex];
                 
+                if (currentBgImage && currentBgImage.width > 0 && currentBgImage.height > 0) {
+                    const { width, height } = Utils.getCanvasSize();                
+                    let scaleX = width / currentBgImage.width;
+                    let scaleY = height / currentBgImage.height;
+                    
+                    let scale = Math.max(scaleX, scaleY);
+                    let scaledWidth = currentBgImage.width * scale;
+                    let scaledHeight = currentBgImage.height * scale;
+                    
+                    let offsetX = (width - scaledWidth) / 2;
+                    let offsetY = (height - scaledHeight) / 2;
+                    
+                    push();
+                    image(currentBgImage, offsetX, offsetY, scaledWidth, scaledHeight);
+                    pop();
+                    useBackgroundImage = true;
+                }
+            }
+            
+            // Use solid color background if no image is selected or image failed to load
+            if (!useBackgroundImage) {
+                const bgColor = COLORS.background[CONFIG.backgroundColor];
+                background(bgColor[0], bgColor[1], bgColor[2]);
+                drawBackgroundText();
+            }
+                    
             const particleColor = COLORS.particle[CONFIG.particleColor];
             stroke(particleColor[0], particleColor[1], particleColor[2], 120);
             strokeWeight(CONFIG.particleSize);
         };
 
-        const drawPoint = (x, y) => {
-            const scaleFactor = CONFIG.canvasBase / 140;
-            point((x + 10) * scaleFactor, (y + 10) * scaleFactor * 4 / 3);
-        };
-
         // ===== P5.JS FUNCTIONS =====
         const executeCode = (codeString) => {
-            // replace createCanvas() with initCanvas()
+            // 定义自定义函数，通过字符串注入的方式添加到代码中
+            const customFunctions = `
+                // 自定义缩放函数，避免直接重载 p5.js 函数
+                const _point = (x, y) => {
+                    const scaleFactor = CONFIG.canvasBase / 140;
+                    const adjustedX = (x + 10) * scaleFactor;
+                    const adjustedY = (y + 10) * scaleFactor * 4 / 3;
+                    point(adjustedX, adjustedY);
+                };
+                
+                const _circle = (x, y, diameter) => {
+                    const scaleFactor = CONFIG.canvasBase / 140;
+                    const adjustedX = (x + 10) * scaleFactor;
+                    const adjustedY = (y + 10) * scaleFactor * 4 / 3;
+                    const adjustedDiameter = diameter * scaleFactor;
+                    circle(adjustedX, adjustedY, adjustedDiameter);
+                };
+                
+                const _rect = (x, y, width, height) => {
+                    const scaleFactor = CONFIG.canvasBase / 140;
+                    const adjustedX = (x + 10) * scaleFactor;
+                    const adjustedY = (y + 10) * scaleFactor * 4 / 3;
+                    const adjustedWidth = width * scaleFactor;
+                    const adjustedHeight = height * scaleFactor * 4 / 3;
+                    rect(adjustedX, adjustedY, adjustedWidth, adjustedHeight);
+                };
+                
+                const _clearRect = (x, y, width, height) => {
+                    const scaleFactor = CONFIG.canvasBase / 140;
+                    const adjustedX = (x + 10) * scaleFactor;
+                    const adjustedY = (y + 10) * scaleFactor * 4 / 3;
+                    const adjustedWidth = width * scaleFactor;
+                    const adjustedHeight = height * scaleFactor * 4 / 3;
+                    push();
+                    erase();
+                    rect(adjustedX, adjustedY, adjustedWidth, adjustedHeight);
+                    noErase();
+                    pop();
+                };
+            `;
+            
+            // 替换函数调用
             codeString = codeString.replace(/createCanvas\([^)]*\);/g, 'initCanvas();');
-            // replace background() with refreshBackground()
             codeString = codeString.replace(/background[^;]*;/g, 'refreshBackground();');
-            // replace point with drawPoint
-            codeString = codeString.replace('point', 'drawPoint');
+            
+            // 替换函数名为自定义函数（使用更精确的正则表达式）
+            codeString = codeString.replace(/\bpoint\(/g, '_point(');
+            codeString = codeString.replace(/\bcircle\(/g, '_circle(');
+            codeString = codeString.replace(/\brect\(/g, '_rect(');
+            codeString = codeString.replace(/\bfillRect\(/g, '_rect(');
+            codeString = codeString.replace(/\bclearRect\(/g, '_clearRect(');
+            
             try {   
-                // Execute the code in global scope
-                eval(codeString);
+                // 在代码前注入自定义函数定义
+                eval(customFunctions + codeString);
             } catch (error) {
                 console.error('Code execution error:', error);
-                console.log('Failed code:', codeString);
+                console.log('Failed code:', customFunctions + codeString);
             }
         };
 
@@ -1041,6 +1215,8 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6,20).stroke(255,80);for(t+=PI/
                     codeSelector.appendChild(option);
                 });
             },
+
+
 
             updateFormulaDisplay(codeKey) {
                 const formulaDisplay = document.getElementById('formula-display');
@@ -1133,10 +1309,10 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6,20).stroke(255,80);for(t+=PI/
                     });
                 });
                 
-                // Background color selection
-                document.querySelectorAll('#background-colors .color-option').forEach(option => {
+                // Background options selection (merged colors and images)
+                document.querySelectorAll('#background-options .color-option').forEach(option => {
                     option.addEventListener('click', () => {
-                        document.querySelectorAll('#background-colors .color-option').forEach(o => {
+                        document.querySelectorAll('#background-options .color-option').forEach(o => {
                             o.classList.remove('active');
                             o.setAttribute('aria-checked', 'false');
                             o.setAttribute('tabindex', '-1');
@@ -1145,7 +1321,20 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6,20).stroke(255,80);for(t+=PI/
                         option.classList.add('active');
                         option.setAttribute('aria-checked', 'true');
                         option.setAttribute('tabindex', '0');
-                        CONFIG.backgroundColor = option.dataset.color;
+                        
+                        const optionType = option.dataset.type;
+                        const optionValue = option.dataset.value;
+                        
+                        if (optionType === 'color') {
+                            // 选择背景颜色时，设置背景色并清空背景图
+                            CONFIG.backgroundColor = optionValue;
+                            CONFIG.backgroundImage = 'none';
+                        } else if (optionType === 'image') {
+                            // 选择背景图像时，设置背景图
+                            CONFIG.backgroundImage = optionValue;
+                            // 背景色保持不变，但图像优先显示
+                        }
+                        
                         UI.updateColors();
                     });
                 });
@@ -1175,6 +1364,10 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6,20).stroke(255,80);for(t+=PI/
                     clear();
                     executeCode(CODE_VARIATIONS[CONFIG.currentCode]);
                     UI.updateFormulaDisplay(CONFIG.currentCode);
+                    
+                    // Update URL parameter for sharing
+                    const codeNumber = CONFIG.currentCode.replace('code', '');
+                    Utils.updateUrlParameter('code', codeNumber);
                 });
                 
                 // Language selector
@@ -1188,6 +1381,12 @@ t=0,draw=$=>{t||createCanvas(w=400,w);background(6,20).stroke(255,80);for(t+=PI/
         function setup() {
             // Detect and set browser language
             currentLang = Utils.detectBrowserLanguage();
+            
+            // Check for code parameter in URL
+            const codeFromUrl = Utils.getValidCodeFromUrl();
+            if (codeFromUrl) {
+                CONFIG.currentCode = codeFromUrl;
+            }
             
             // Initialize canvas
             const { width, height } = Utils.getCanvasSize();

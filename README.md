@@ -32,18 +32,18 @@ This 3D effect can be even more pronounced for individuals with myopia (nearsigh
 
 ### Project's Contribution
 
-This project's main contribution is the **systematic organization of these sophisticated generative art formulas, combined with the Chromostereopsis effect**. By allowing users to customize particle and background colors, it provides a tool to trigger and control this glasses-free 3D phenomenon. The result transforms flat mathematical art into a dynamic, three-dimensional visual experience.
+This project's main contribution is the **systematic organization of these sophisticated generative art formulas, combined with the Chromostereopsis effect**. By allowing users to customize particle and background, it provides a tool to trigger and control this glasses-free 3D phenomenon. The result transforms flat mathematical art into a dynamic, three-dimensional visual experience.
 
 ## Features
 
 ### 🎨 Diverse Artistic Effects
-- **42 Different Code Variations**: Each based on a unique mathematical formula for distinct visuals.
+- **48 Different Code Variations**: Each based on a unique mathematical formula for distinct visuals.
 - **Real-time Animation**: Dynamic effects driven by a time variable for fluid particle motion.
 - **Math-Driven**: Art generated using trigonometric functions, exponential functions, and more.
 
 ### 🎛️ Customizable Visual Parameters
 - **Particle Color**: Choose from 4 presets (Red, Orange, Yellow, Pure Red).
-- **Background Color**: Choose from 4 presets (Blue, Cyan, Purple, Black).
+- **Background**: Choose from 3 presets.
 - **Particle Size**: Adjust particle size from 0.5 to 3.0.
 - **Canvas Size**: Adjust a base multiplier from 120 to 250. The canvas maintains a 3:4 aspect ratio, resulting in final dimensions ranging from 360x480 to 750x1000 pixels.
 
@@ -123,15 +123,15 @@ npx http-server
 ## Usage
 
 1. **Select Art Effect**: Choose a code variation from the dropdown menu.
-2. **Adjust Colors**: Change particle and background colors.
+2. **Adjust Colors**: Change particle colors and background.
 3. **Adjust Sizes**: Use the +/- buttons to change particle and canvas sizes.
 4. **Switch Language**: Select your preferred language.
 5. **Save Image**: Click the camera icon to save the artwork as a high-quality PNG file. The filename is automatically generated (e.g., `generative-art-5-1672531200.png`).
 
 ### Parameter Guide
-- **Code Selection**: Choose from 42 different mathematical algorithms, each creating a unique visual.
+- **Code Selection**: Choose from 48 different mathematical algorithms, each creating a unique visual.
 - **Particle Color**: Sets the color of the moving points. To best experience the 3D effect, use a Red/Orange particle on a Blue/Black background.
-- **Background Color**: Sets the canvas background color.
+- **Background**: Sets the canvas background.
 - **Particle Size**: Controls the diameter of the drawn points.
 - **Canvas Size**: Adjusts the canvas dimensions.
 - **Save Image**: Captures the current canvas content.
