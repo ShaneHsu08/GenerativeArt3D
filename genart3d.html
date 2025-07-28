@@ -635,9 +635,7 @@
             <div class="control-group">
                 <label class="control-label" id="bg-label">Background</label>
                 <div class="color-selector" role="radiogroup" aria-labelledby="bg-label" id="background-options">
-                    <div class="color-option bg-blue active" data-type="color" data-value="blue" role="radio" aria-checked="true" aria-label="Blue" tabindex="0"></div>
-                    <div class="color-option bg-black" data-type="color" data-value="black" role="radio" aria-checked="false" aria-label="Black" tabindex="-1"></div>
-                    <div class="color-option bg-image-1" data-type="image" data-value="0" role="radio" aria-checked="false" aria-label="Background 1" tabindex="-1">1</div>
+                    <div class="color-option bg-image-1 active" data-type="image" data-value="0" role="radio" aria-checked="true" aria-label="Background 1" tabindex="0">1</div>
                     <div class="color-option bg-image-2" data-type="image" data-value="1" role="radio" aria-checked="false" aria-label="Background 2" tabindex="-1">2</div>
                     <div class="color-option bg-image-3" data-type="image" data-value="2" role="radio" aria-checked="false" aria-label="Background 3" tabindex="-1">3</div>
                 </div>
@@ -732,7 +730,7 @@
         const CONFIG = {
             particleColor: 'red',
             backgroundColor: 'blue',
-            backgroundImage: 'none',
+            backgroundImage: '0',
             currentCode: 'code1',
             particleSize: 1.6,
             canvasBase: 140,

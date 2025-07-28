@@ -126,7 +126,7 @@ npx http-server
 2. **Adjust Colors**: Change particle colors and background.
 3. **Adjust Sizes**: Use the +/- buttons to change particle and canvas sizes.
 4. **Switch Language**: Select your preferred language.
-5. **Save Image**: Click the camera icon to save the artwork as a high-quality PNG file. The filename is automatically generated (e.g., `generative-art-5-1672531200.png`).
+5. **Save Image**: Click the camera icon to save the artwork as a high-quality PNG file. The filename is automatically generated (e.g., `generative-art-code20-2025-07-28_16-52-55.png`).
 
 ### Parameter Guide
 - **Code Selection**: Choose from 48 different mathematical algorithms, each creating a unique visual.
